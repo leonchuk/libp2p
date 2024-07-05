@@ -112,7 +112,7 @@ public class ChannelManager {
 
     if (!channel.isActive() && !channel.isTrustPeer()) {
 
-      if(!Parameter.p2pConfig.isDiscoverEnable() && channels.size()){
+      if(!Parameter.p2pConfig.isDiscoverEnable() && channels.size() > 0){
         log.info("Discover off, disconnected with {}", channel);
         return DisconnectCode.TOO_MANY_PEERS;
       }
