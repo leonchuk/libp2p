@@ -111,6 +111,12 @@ public class ChannelManager {
   public static synchronized DisconnectCode processPeer(Channel channel) {
 
     if (!channel.isActive() && !channel.isTrustPeer()) {
+
+      if(!Parameter.p2pConfig.isDiscoverEnable()){
+        log.info("Discover off, disconnected with {}", channel);
+        return DisconnectCode.TOO_MANY_PEERS;
+      }
+      
       InetAddress inetAddress = channel.getInetAddress();
       if (bannedNodes.getIfPresent(inetAddress) != null
           && bannedNodes.getIfPresent(inetAddress) > System.currentTimeMillis()) {
